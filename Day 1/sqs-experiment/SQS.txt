@@ -18,11 +18,16 @@ aws sqs get-queue-attributes \
     --queue-url http://localhost:4566/000000000000/producer-consumer-demo \
     --attribute-names All
 
+# set long polling time (recommended cuz why not)
+aws sqs set-queue-attributes \
+    --queue-url http://localhost:4566/000000000000/producer-consumer-demo \
+    --attributes ReceiveMessageWaitTimeSeconds=15
+
 
 # receiver
 aws sqs receive-message \
     --queue-url http://localhost:4566/000000000000/producer-consumer-demo \
-    --max-number-of-messages 4
+    --max-number-of-messages 3
 
 
 # messages are not deleted (yet)
