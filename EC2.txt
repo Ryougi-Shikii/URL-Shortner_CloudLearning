@@ -1,0 +1,24 @@
+# make vm instance 
+aws ec2 run-instances \
+    --image-id ami-0abcdef1234567890 \
+    --instance-type t2.micro \
+    --key-name MyLearningKey \
+    --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Sumit-Learning-Server}]'
+
+"InstanceId": "i-c6c522e20cbbd8828"
+
+# Replace i-0123456789abcdef0 with the actual Instance ID you got from Step 1
+aws ec2 describe-instances \
+    --instance-ids i-c6c522e20cbbd8828 \
+    --query 'Reservations[*].Instances[*].[InstanceId, State.Name, InstanceType]' \
+    --output table
+
+# stop the instance
+aws ec2 stop-instances --instance-ids i-c6c522e20cbbd8828
+
+
+
+
+# to find all running instances
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId, Tags[?Key==`Name`]|[0].Value, State.Name]' --output table
+

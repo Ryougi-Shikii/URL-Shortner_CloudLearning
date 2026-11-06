@@ -1,0 +1,16 @@
+# Create a bucket
+aws s3 mb s3://<name-of-bucket>
+
+# store in s3 bucket
+aws s3 cp aws.txt s3://<name-of-bucket>/
+
+# list objects of the bucket
+aws s3 ls s3://<name-of-bucket>/
+
+aws s3 cp s3://<name-of-bucket>/aws.txt downloaded_aws.txt
+cat downloaded_aws.txt
+
+
+# cleaning
+aws s3 rm s3://<name-of-bucket>/hello.txt
+aws s3 rb s3://<name-of-bucket>
