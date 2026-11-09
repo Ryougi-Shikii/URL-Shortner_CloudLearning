@@ -12,7 +12,7 @@ def send_task(task):
     response = sqs.send_message(
         QueueUrl=QUEUE_URL,
         MessageBody=task
-    )
+    ) 
 
     print(f"Sent: {task}")
     print(f"Message ID: {response['MessageId']}")
@@ -23,6 +23,7 @@ if __name__ == "__main__":
     tasks = [
         "Process image.jpg",
         "Process video.mp4",
+        "FAIL: Process corrupted image",
         "Generate thumbnail.png",
         "Compress document.pdf"
     ]

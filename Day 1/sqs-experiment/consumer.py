@@ -1,5 +1,6 @@
 
 import boto3
+import time
 
 QUEUE_URL = "http://localhost:4566/000000000000/producer-consumer-demo"
 
@@ -13,7 +14,12 @@ def process_message(body):
     """Simulate processing a task."""
     print(f"Processing: {body}")
 
+    if body.startswith("FAIL"):
+        # We did't yet deleted this task so this task will forever be in loop!
+        raise ValueError("Simulated processing failure")
+
     # Actual processing logic would go here.
+    time.sleep(5) # simulating process 
 
     print(f"Successfully processed: {body}")
 
